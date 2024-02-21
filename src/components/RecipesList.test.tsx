@@ -32,6 +32,8 @@ describe("RecipeList", () => {
         )
     });
 
+    afterEach(jest.resetAllMocks)
+
     mockRecipes.forEach(recipe => {
         it(`should render recipe ${recipe.name}`, () => {
             const recipeElement = screen.getByText(recipe.name);
