@@ -1,23 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import RecipesBook from './components/RecipesBook.tsx';
+import RecipeForm from './components/RecipeForm.tsx';
+import { Route, Switch } from 'react-router-dom';
+import { RecipeProvider } from './context/RecipeContext.tsx';
+import { RecipeActionTypes } from './context/types.tsx';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="center">
+        <RecipeProvider>
+          <Switch>
+            <Route exact path="/add" render={() => <RecipeForm actionType={RecipeActionTypes.ADD_RECIPE} />} />
+            <Route exact path="/update/:id" render={() => <RecipeForm actionType={RecipeActionTypes.UPDATE_RECIPE} />} />
+            <Route exact path="/" component={RecipesBook} />
+          </Switch>
+        </RecipeProvider>
+      </div>
     </div>
   );
 }
